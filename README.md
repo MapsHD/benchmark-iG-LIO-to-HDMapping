@@ -1,5 +1,9 @@
 # ig_lio-converter
 
+## Example Dataset: 
+
+Download the dataset from [Bunker DVI Dataset](https://charleshamesse.github.io/bunker-dvi-dataset/)  
+
 ## Dependecies
 ```shell
 sudo apt install nlohmann-json3-dev
@@ -59,11 +63,6 @@ cd /test_ws/ros_ws
 source ./devel/setup.sh # adjust to used shell
 rosrun ig-lio-to-hdmapping listener <recorded_bag> <output_dir>
 ```
-
-## Example:
-
-Download the dataset from [NTU-VIRAL](https://ntu-aris.github.io/ntu_viral_dataset/)
-For this example, download eee_03.
 
 ## Record the bag file:
 
