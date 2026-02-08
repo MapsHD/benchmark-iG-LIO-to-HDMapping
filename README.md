@@ -1,8 +1,9 @@
-# ig_lio-converter
+# [iG-LIO](https://github.com/zijiechenrobotics/ig_lio) converter to [HDMapping](https://github.com/MapsHD/HDMapping)
 
-## Example Dataset: 
+## Hint
 
-Download the dataset from [Bunker DVI Dataset](https://charleshamesse.github.io/bunker-dvi-dataset/)  
+Please change branch to [Bunker-DVI-Dataset-reg-1](https://github.com/MapsHD/benchmark-iG-LIO-to-HDMapping/tree/Bunker-DVI-Dataset-reg-1) for quick experiment.  
+
 
 ## Dependecies
 ```shell
