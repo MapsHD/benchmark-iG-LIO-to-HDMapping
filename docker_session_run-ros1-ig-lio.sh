@@ -9,7 +9,7 @@ BAG_OUTPUT_CONTAINER='/ros_ws/recordings'
 RECORDED_BAG_NAME="recorded-ig-lio.bag"
 HDMAPPING_OUT_NAME="output_hdmapping"
 
-RESULT_IG_LIO_HOST_PATH="/home/janusz/hdmapping-benchmark/benchmark-iG-LIO-to-HDMapping/src/ig_lio/result"
+RESULT_IG_LIO_HOST_PATH="~/hdmapping-benchmark/benchmark-iG-LIO-to-HDMapping/src/ig_lio/result"
 RESULT_IG_LIO_CONTAINER_PATH="/ros_ws/src/ig_lio/result"
 
 usage() {
