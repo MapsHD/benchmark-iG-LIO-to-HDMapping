@@ -9,7 +9,7 @@ BAG_OUTPUT_CONTAINER='/ros_ws/recordings'
 RECORDED_BAG_NAME="recorded-ig-lio.bag"
 HDMAPPING_OUT_NAME="output_hdmapping"
 
-RESULT_IG_LIO_HOST_PATH="/home/janusz/ros_ws_ig_lio/src/result"
+RESULT_IG_LIO_HOST_PATH="$HOME/hdmapping-benchmark/benchmark-iG-LIO-to-HDMapping/src/ig_lio/result"
 RESULT_IG_LIO_CONTAINER_PATH="/ros_ws/src/ig_lio/result"
 
 usage() {
@@ -80,7 +80,7 @@ docker run -it --rm \
     tmux send-keys -t '"$TMUX_SESSION"' '\''sleep 5
 source /opt/ros/noetic/setup.bash
 source /ros_ws/devel/setup.bash
-roslaunch ig_lio lio_avia.launch use_sim_time:=true
+roslaunch ig_lio lio_bg_velodyne.launch use_sim_time:=true
 '\'' C-m
 
     # ---------- PANEL 2: rosbag record ----------

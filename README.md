@@ -1,10 +1,12 @@
 # iG-LIO to HDMapping simlified instruction
 
 ## Step 1 (prepare data)
-Download the dataset `reg-1.bag` by clicking [link](https://cloud.cylab.be/public.php/dav/files/7PgyjbM2CBcakN5/reg-1.bag) (it is part of [Bunker DVI Dataset](https://charleshamesse.github.io/bunker-dvi-dataset)).
+Download the dataset `kitti_seq00_ros1.bag` by clicking [link](https://huggingface.co/datasets/kubchud/kitti_to_ros/resolve/main/kitti_seq00_ros1.bag) (it is part of [kitti_seq](https://github.com/Jakubach/kitti_to_ros)).
 
-File 'reg-1.bag' is an input for further calculations.
-It should be located in '~/hdmapping-benchmark/data'.
+### Extract the dataset
+
+File `kitti_seq00_ros1.bag` is an input for further calculations.
+It should be located in `~/hdmapping-benchmark/data`.  
 
 
 ## Step 2 (prepare docker)
@@ -13,16 +15,16 @@ mkdir -p ~/hdmapping-benchmark
 cd ~/hdmapping-benchmark
 git clone https://github.com/MapsHD/benchmark-iG-LIO-to-HDMapping.git --recursive
 cd benchmark-iG-LIO-to-HDMapping
-git checkout Bunker-DVI-Dataset-reg-1
+git checkout kitti
 docker build -t ig-lio_noetic .
 ```
 
-## Step 3 (run docker, file 'reg-1.bag' should be in '~/hdmapping-benchmark/data')
+## Step 3 (run docker, file 'kitti_seq00_ros1.bag' should be in '~/hdmapping-benchmark/data')
 ```shell
 cd ~/hdmapping-benchmark/benchmark-iG-LIO-to-HDMapping
 chmod +x docker_session_run-ros1-ig-lio.sh 
 cd ~/hdmapping-benchmark/data
-~/hdmapping-benchmark/benchmark-iG-LIO-to-HDMapping/docker_session_run-ros1-ig-lio.sh reg-1.bag .
+~/hdmapping-benchmark/benchmark-iG-LIO-to-HDMapping/docker_session_run-ros1-ig-lio.sh kitti_seq00_ros1.bag .
 ```
 
 ## Step 4 (Open and visualize data)
@@ -35,47 +37,11 @@ lio_initial_poses.reg
 
 poses.reg
 
-scan_lio_0.laz
-
-scan_lio_1.laz
-
-scan_lio_2.laz
-
-scan_lio_3.laz
-
-scan_lio_4.laz
-
-scan_lio_5.laz
-
-scan_lio_6.laz
-
-scan_lio_7.laz
-
-scan_lio_8.laz
-
-scan_lio_9.laz
+scan_lio_*.laz
 
 session.json
 
-trajectory_lio_0.csv
-
-trajectory_lio_1.csv
-
-trajectory_lio_2.csv
-
-trajectory_lio_3.csv
-
-trajectory_lio_4.csv
-
-trajectory_lio_5.csv
-
-trajectory_lio_6.csv
-
-trajectory_lio_7.csv
-
-trajectory_lio_8.csv
-
-trajectory_lio_9.csv
+trajectory_lio_*.csv
 
 ## Contact email
 januszbedkowski@gmail.com
