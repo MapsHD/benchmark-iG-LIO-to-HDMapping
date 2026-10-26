@@ -1,0 +1,8 @@
+<launch>
+    <!-- iG-LIO on the benchmark's canonical bag: lio_bg_velodyne.launch with ig_lio_canonical.yaml -->
+    <rosparam command="load" file="$(find ig-lio-to-hdmapping)/config/ig_lio_canonical.yaml" />
+
+    <node pkg="ig_lio" type="ig_lio_node" name="ig_lio_node" output="screen" />
+    
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ig_lio)/rviz/lio_show.rviz" required="true" />
+</launch>
