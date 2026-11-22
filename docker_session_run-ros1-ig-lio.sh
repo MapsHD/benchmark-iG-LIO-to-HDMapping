@@ -9,7 +9,12 @@ BAG_OUTPUT_CONTAINER='/ros_ws/recordings'
 RECORDED_BAG_NAME="recorded-ig-lio.bag"
 HDMAPPING_OUT_NAME="output_hdmapping"
 
-RESULT_IG_LIO_HOST_PATH="$HOME/hdmapping-benchmark/benchmark-iG-LIO-to-HDMapping/src/ig_lio/result"
+# ig_lio writes result/lio_odom.txt next to its sources and exits at start if
+# it cannot. The folder is taken from this script's own location (the repo can
+# live anywhere) and created by the invoking user before Docker mounts it;
+# otherwise Docker creates it owned by root and ig_lio (user 1000) cannot write.
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+RESULT_IG_LIO_HOST_PATH="$SCRIPT_DIR/src/ig_lio/result"
 RESULT_IG_LIO_CONTAINER_PATH="/ros_ws/src/ig_lio/result"
 
 usage() {
@@ -52,7 +57,7 @@ fi
 
 mkdir -p "$BAG_OUTPUT_HOST"
 
-mkdir -p "$RESULT_IG_LIO_PATH"
+mkdir -p "$RESULT_IG_LIO_HOST_PATH"
 
 DATASET_HOST_PATH=$(realpath "$DATASET_HOST_PATH")
 BAG_OUTPUT_HOST=$(realpath "$BAG_OUTPUT_HOST")
@@ -62,9 +67,13 @@ echo "Output dir: $BAG_OUTPUT_HOST"
 
 xhost +local:docker >/dev/null
 
+# RViz renders on the CPU (Mesa llvmpipe): this is a ROS1 Noetic image, whose
+# Mesa is too old for new GPUs. RViz is not required: if it fails, ig_lio keeps
+# running (see the Dockerfile).
 docker run -it --rm \
   --network host \
   -e DISPLAY=$DISPLAY \
+  -e LIBGL_ALWAYS_SOFTWARE=1 \
   -e ROS_HOME=/tmp/.ros \
   -u 1000:1000 \
   -v /tmp/.X11-unix:/tmp/.X11-unix \

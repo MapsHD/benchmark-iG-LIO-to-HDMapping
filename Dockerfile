@@ -43,7 +43,18 @@ COPY ./src ./src
 
 RUN source /opt/ros/noetic/setup.bash && \
     catkin_make
-    
+
+# RViz is only a viewer and must never cost the run: upstream's lio_avia.launch
+# marks it required="true", so when RViz dies (no display, GL failure) roslaunch
+# also shuts ig_lio down. The benchmark launch drops that flag (ig_lio's source
+# stays unchanged). RViz renders with Mesa's software renderer (the run script
+# sets LIBGL_ALWAYS_SOFTWARE=1: Ubuntu 20.04's Mesa is too old for new GPUs),
+# so the guard also checks that swrast is in the image.
+RUN sed -i 's|\(<node name="rviz"[^>]*\) required="true"|\1|' src/ig_lio/launch/lio_avia.launch && \
+    grep -q '<node name="rviz"' src/ig_lio/launch/lio_avia.launch && \
+    ! grep -q 'required="true"' src/ig_lio/launch/lio_avia.launch && \
+    test -e /usr/lib/x86_64-linux-gnu/dri/swrast_dri.so
+
 ARG UID=1000
 ARG GID=1000
 RUN groupadd -g $GID ros && \
