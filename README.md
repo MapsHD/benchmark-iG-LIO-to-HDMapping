@@ -1,7 +1,17 @@
-# iG-LIO to HDMapping simlified instruction
+# iG-LIO to HDMapping simplified instruction
 
 ## Step 1 (prepare data)
-Download the dataset `reg-1.bag` by clicking [link](https://cloud.cylab.be/public.php/dav/files/7PgyjbM2CBcakN5/reg-1.bag) (it is part of [Bunker DVI Dataset](https://charleshamesse.github.io/bunker-dvi-dataset)).
+Download the dataset `reg-1.bag` by clicking [link](https://cloud.cylab.be/public.php/dav/files/7PgyjbM2CBcakN5/reg-1.bag) or from the [Zenodo](https://zenodo.org/records/23069933) mirror (it is part of [Bunker DVI Dataset](https://charleshamesse.github.io/bunker-dvi-dataset)).
+
+On Zenodo the bag archive is split into `reg-1.zip.part-000`, `reg-1.zip.part-001`, etc.,
+download all parts, then merge and extract them:
+
+```bash
+cd ~/Downloads
+cat reg-1.zip.part-0* > full.zip
+zip -F full.zip --out full-fixed.zip
+unzip full-fixed.zip
+```
 
 File 'reg-1.bag' is an input for further calculations.
 It should be located in '~/hdmapping-benchmark/data'.
@@ -25,9 +35,17 @@ cd ~/hdmapping-benchmark/data
 ~/hdmapping-benchmark/benchmark-iG-LIO-to-HDMapping/docker_session_run-ros1-ig-lio.sh reg-1.bag .
 ```
 
+While the bag plays you can watch iG-LIO build the map live in RViz:
+
+![iG-LIO running in RViz](images/RViz.png)
+
 ## Step 4 (Open and visualize data)
 Expected data should appear in ~/hdmapping-benchmark/data/output_hdmapping-ig-lio
 Use tool [multi_view_tls_registration_step_2](https://github.com/MapsHD/HDMapping) to open session.json from ~/hdmapping-benchmark/data/output_hdmapping-ig-lio.
+
+![iG-LIO session opened in HDMapping multi_view_tls_registration_step_2, top view](images/STEP2_1.png)
+
+![iG-LIO session opened in HDMapping multi_view_tls_registration_step_2, side view](images/STEP2_2.png)
 
 You should see following data
 
